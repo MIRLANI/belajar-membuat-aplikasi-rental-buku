@@ -1,0 +1,53 @@
+@startuml
+
+
+
+class rules{
+    id int () <<PR>>
+    name varchar(200)
+}
+
+class users{
+    id int <<PR>>
+    password varchar(200)
+    rule_id int()
+    phone varchar(12)
+    address text()
+    status bool()
+}
+
+class catagories{
+    id int <<PR>>
+    name varchar(200)
+}
+
+class books{
+    id int <<PR>>
+    book_code varchar(100)
+    title varchar(100)
+    status bool()
+
+}
+
+class books_catagories{
+    id int <<PR>>
+    book_id int()
+    catagories_id int()
+}
+
+class rent_logs{
+    id int <<PR>>
+    user_id int()
+    book_id int()
+    rent_date timestamp()
+    return_date varchar(100)
+    actual_returt_date timestamp()
+}
+
+users}|--o|rules
+books||--o{books_catagories
+catagories||--o{books_catagories
+books}|--|{rent_logs
+users}|--|{rent_logs
+
+@enduml
