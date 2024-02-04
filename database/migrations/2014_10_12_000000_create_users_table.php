@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('password');
             $table->string("phone")->nullable();
             $table->unsignedBigInteger("role_id");
-            $table->text("addres")->nullable(false);
-            $table->string("status")->default("isactive");
+            $table->text("address")->nullable(false);
+            $table->string("status")->default("inactive");
             $table->timestamps();
         });
     }
