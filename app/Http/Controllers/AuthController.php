@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,10 @@ class AuthController extends Controller
     public function authentication(UserRequest $request): RedirectResponse
     {
         
+        // digunakan untuk menyimpan mudahkan user supaya tidak memasukan lagi  datanya berulang kali
+        Session::flash("username", $request->input("username"));
+        Session::flash("password", $request->input("password"));
+
         if (Auth::attempt([
             "username" => $request->input("username"),
             "password" => $request->input("password")
@@ -48,5 +53,13 @@ class AuthController extends Controller
             Session::flash("status");
             return redirect()->route("login")->with("message", "username atau password anda salah");
         }
+    }
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return response()->redirectTo("login");
     }
 }

@@ -43,13 +43,13 @@
                     <label for="username" class="form-label">Username: </label>
                    
                     <input type="txt" name="username" class="form-control @error('username') is-invalid @enderror"
-                        id="username" placeholder="username" value="{{ old('username') }}">
+                        id="username" placeholder="username" value="{{ old('username') ?: session('username') }}">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password: </label>
                  
                     <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                        id="password" placeholder="password" value="{{ old('password') }}">
+                        id="password" placeholder="password" value="{{ old('password') ?:session('password') }}">
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary form-control">Login</button>
