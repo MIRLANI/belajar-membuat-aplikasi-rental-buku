@@ -9,6 +9,6 @@ class BookController extends Controller
 {
     public function index(): Response
     {
-        return response()->view("book");
+        return response()->view("pages.book");
     }
 }

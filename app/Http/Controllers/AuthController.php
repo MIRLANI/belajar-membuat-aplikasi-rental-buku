@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,12 +16,12 @@ class AuthController extends Controller
 {
     public function login(): Response
     {
-        return response()->view("login");
+        return response()->view("auth.login");
     }
 
     public function register(): Response
     {
-        return response()->view("register");
+        return response()->view("auth.register");
     }
 
 
@@ -30,11 +32,15 @@ class AuthController extends Controller
         Session::flash("username", $request->input("username"));
         Session::flash("password", $request->input("password"));
 
+        // ketika Auth:attempt itu berhasil maka secara otomatis laravel akan dibuatkan session
         if (Auth::attempt([
             "username" => $request->input("username"),
             "password" => $request->input("password")
             ])) {
                 if (Auth::user()->status != "active") {
+                    Auth::logout();
+                    $request->session()->invalidate();
+                    $request->session()->regenerateToken();
                     Session::flash("status");
                     Session::flash("message", "Akun kamu belum aktif. Segera hubungi admin!");
                     
@@ -61,5 +67,15 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return response()->redirectTo("login");
+    }
+
+    public function doRegister(UserRegisterRequest $request)
+    {
+       
+        User::query()->create($request->all());
+        
+        Session::flash("status");
+        return redirect("register")->with("message", "Berhasil melakukan register silahkan hubungi admin untuk tahap selanjutnya");
+
     }
 }

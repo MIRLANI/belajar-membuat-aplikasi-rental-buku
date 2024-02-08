@@ -18,5 +18,15 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        if ($this->command->confirm("Apakah kamu ingin fresh migration seeder yang akan menghapus data di database?")) {
+            $this->command->call("migrate:fresh");
+            $this->command->info("berhasil melakukan fresh");
+            if ($this->command->confirm("apakah kamu ingin membuat seeder")) {
+                $this->call(RoleSeeder::class);
+                $this->call(UserSeeder::class);
+                $this->call(CatagoriesSeeder::class);
+            }
+        }
     }
 }

@@ -25,7 +25,8 @@ class CatagoriesSeeder extends Seeder
 
        foreach ($data as   $value) {
         Catagori::insert([
-            "name" => $value
+            "name" => $value,
+            "slug" => $value
         ]);
        }      
            

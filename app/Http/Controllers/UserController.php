@@ -7,10 +7,9 @@ use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
-     public function profile(Request $request):Response
+     public function index(Request $request): Response
      {
-        // $request->session()->flush();
-        return response()->view("profile");
+        return response()->view("pages.users");
      }
 
 
