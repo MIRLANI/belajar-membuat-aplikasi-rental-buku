@@ -40,6 +40,8 @@ Route::middleware("auth")->group(function(){
     
     Route::controller(BookController::class)->group(function(){
         Route::get("/books", "index")->name("index.books");
+        Route::get("/books-add", "add")->name("add.books");
+        Route::post("/books-add", "store")->name("save.books");
     });
 
     Route::controller(CatagoriController::class)->group(function(){

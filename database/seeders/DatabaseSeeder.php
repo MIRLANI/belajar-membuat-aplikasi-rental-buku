@@ -22,11 +22,13 @@ class DatabaseSeeder extends Seeder
         if ($this->command->confirm("Apakah kamu ingin fresh migration seeder yang akan menghapus data di database?")) {
             $this->command->call("migrate:fresh");
             $this->command->info("berhasil melakukan fresh");
-            if ($this->command->confirm("apakah kamu ingin membuat seeder")) {
-                $this->call(RoleSeeder::class);
-                $this->call(UserSeeder::class);
-                $this->call(CatagoriesSeeder::class);
-            }
+            
+        }
+        if ($this->command->confirm("apakah kamu ingin membuat seeder")) {
+            $this->call(RoleSeeder::class);
+            $this->call(UserSeeder::class);
+            $this->call(CatagoriesSeeder::class);
+            $this->call(BookSeeder::class);
         }
     }
 }
