@@ -19,9 +19,15 @@
                                         request()->route()->uri == 'books-add' ||
                                         request()->route()->uri == 'books-edit/{slug}' ? 'active' : '' }}">
                 <a class="sidebar-link" href="/books">
-                    <span class="align-middle">Books</span>
+                    <span class="align-middle">Books List</span>
                 </a>
             </li>
+            <li class="sidebar-item {{ request()->route()->uri == 'book-rent' ? 'active' : '' }}">
+                <a class="sidebar-link" href="/book-rent">
+                    <span class="align-middle">Book Rent</span>
+                </a>
+            </li>
+            
             <li class="sidebar-item {{ 
                                         request()->route()->uri == 'catagories' ||
                                         request()->route()->uri == 'catagories-add' ||

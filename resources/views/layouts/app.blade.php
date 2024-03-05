@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  
+
     <link rel="stylesheet" href="css/tambah.css">
 </head>
 
@@ -28,24 +28,28 @@
 
     <div class="wrapper">
 
-        @if (Auth::user()->role_id == 1)
-           @include('partials.navbarAdmin')
+        @if (Auth::user())
+            @if (Auth::user()->role_id == 1)
+                @include('partials.navbarAdmin')
+            @else
+                @include('partials.navbarClient')
+            @endif
         @else
-           @include('partials.navbarClient')
+            @include('partials.guest')
         @endif
 
         <div class="main">
-			@include('partials.subnavbar')
-			<main class="content">
-				<div class="container-fluid p-0">
+            @include('partials.subnavbar')
+            <main class="content">
+                <div class="container-fluid p-0">
 
-                    @yield('content')					
+                    @yield('content')
 
-				</div>
-			</main>
+                </div>
+            </main>
 
-			@include('partials.footer')
-		</div>
+            @include('partials.footer')
+        </div>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

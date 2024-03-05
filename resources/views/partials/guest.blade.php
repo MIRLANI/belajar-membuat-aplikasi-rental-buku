@@ -9,20 +9,15 @@
                 MENU
             </li>
 
-            <li class="sidebar-item {{ request()->route()->uri == 'profile' ? 'active' : '' }}">
-                <a class="sidebar-link" href="/profile">
-                    <span class="align-middle">Profile</span>
-                </a>
-            </li>
-            <li class="sidebar-item {{ request()->route()->uri == '/' ? 'active' : '' }}">
+            {{-- <li class="sidebar-item {{ request()->route()->uri == '/' ? 'active' : '' }}">
                 <a class="sidebar-link" href="/">
                     <span class="align-middle">Book List</span>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="sidebar-item">
-                <a class="sidebar-link" href="/logout">
-                    <span class="align-middle">Logout</span>
+                <a class="sidebar-link" href="/login">
+                    <span class="align-middle">Login</span>
                 </a>
             </li>
 

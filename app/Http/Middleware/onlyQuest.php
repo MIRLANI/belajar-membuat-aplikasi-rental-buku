@@ -17,7 +17,7 @@ class onlyQuest
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::user()){
-            return response()->redirectTo("books");
+            return response()->redirectTo("/");
         }
         return $next($request);
     }
