@@ -11,6 +11,7 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
     <h1>Book List</h1>
 
     <div class="mt-5 d-flex justify-content-end">
+        <a href="/books-delete" class="btn btn-secondary me-3">View Delete Data</a>
         <a href="/books-add" class="btn btn-primary">Add Data</a>
     </div>
 
@@ -26,7 +27,8 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
                     <td>No</td>
                     <td>Book Code</td>
                     <td>Title</td>
-                    <td>Cover</td>
+                    <td>Catagori</td>
+                    <td>Status</td>
                     <td>Action</td>
                 </tr>
             <tbody>
@@ -35,10 +37,16 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $book->book_code }}</td>
                         <td>{{ $book->title }}</td>
-                        <td>{{ $book->cover }}</td>
                         <td>
-                            <a href="#" class="btn btn-warning"><i class="bi bi-pencil-square "></i></a>
-                            <a href="#" onclick="alert('yakin untuk menghapus!')" class="btn btn-danger"><i
+                            @foreach ($book->catagories as $item)
+                             {{ $item->name }}
+                        @endforeach
+                        </td>
+                        <td>{{ $book->title }}</td>
+                        <td>{{ $book->status }}</td>
+                        <td>
+                            <a href="/books-edit/{{ $book->slug }}" class="btn btn-warning"><i class="bi bi-pencil-square "></i></a>
+                            <a href="/books-delete/{{ $book->slug }}" onclick="alert('yakin untuk menghapus!')" class="btn btn-danger"><i
                                     class="bi bi-trash"></i></a>
 
                         </td>

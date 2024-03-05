@@ -17,6 +17,7 @@ class BookSeeder extends Seeder
             "book_code" => "A001",
             "title" => "book title",
             "cover" => "book cover",
+            "slug" => "book-title"
         ]);
     }
 }

@@ -1,19 +1,18 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Book')
+
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 
 @section('content')
-
-    <h1>Tambah Book</h1>
+    <h1>Edit Book</h1>
 
     <div class="mt-5 d-flex justify-content-end">
         <a href="/books" class="btn btn-primary">Back</a>
     </div>
 
     <div class="mt-5 w-50">
-        <form action="/books-add" method="post" enctype="multipart/form-data">
+        <form action="/books-edit/{{ $book->slug }}" method="post" enctype="multipart/form-data">
             @csrf
 
             <div class="my-3">
@@ -22,7 +21,8 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
                 <input type="text" name="book_code" id="book_code" placeholder="Code Book..."
-                    class="form-control @error('book_code') is-invalid @enderror" value="{{ old('book_code') }}">
+                    value="{{ $book->book_code }}" class="form-control @error('book_code') is-invalid @enderror"
+                    value="{{ old('book_code') }}">
             </div>
 
             <div class="my-3">
@@ -30,21 +30,40 @@
                 @error('title')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
-                <input type="text" name="title" id="title" placeholder="Title Book..."
+                <input type="text" name="title" id="title" placeholder="Title Book..." value="{{ $book->title }}"
                     class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
             </div>
 
             <div class="my-3">
-                <label for="image" class="form-label">Image Book </label>
+                <div class="mt-3">
+                    @if ($book->cover != '')
+                        <img src="{{ asset('storage/' . $book->cover) }}" alt="" width="300px">
+                    @else
+                        <img src="" alt="Image Not Found">
+                    @endif
+                </div>
+                <input type="hidden" name="image" value="{{ $book->cover }}">
+
+               <div class="mt-3">
+                <label for="image" class="form-label">Update Cover Book: </label>
                 @error('imgae')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
-                <input type="file" name="image" id="image" placeholder="image Book..."
-                    class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}">
+                <input type="file" name="image" id="image" placeholder="image Book..." 
+                class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}">
+            </div>
+            </div>
+            <div class="currentCatagori">
+                Curent Catagori
+                <ul>
+                    @foreach ($book->catagories as $catagori)
+                        <li>{{ $catagori->name }}</li>
+                    @endforeach
+                </ul>
             </div>
 
             <div class="my-3">
-                <label for="catagories" class="form-label">Catagori: </label>
+                <label for="catagories" class="form-label">Update Catagori: </label>
                 <select name="catagories[]" id="catagories" class="form-control select-multiple" multiple>
                     <option value="">Pilih Catagori</option>
                     @foreach ($catagories as $catagori)
@@ -52,15 +71,14 @@
                     @endforeach
                 </select>
             </div>
-
             <div class="mt-2">
-                <button type="submit" name="tambah" class="btn btn-success">Tambah</button>
+                <button type="submit" name="tambah" class="btn btn-success">Update</button>
             </div>
 
         </form>
     </div>
 
-   
+
     <script>
         $(document).ready(function() {
             $('.select-multiple').select2();
@@ -71,4 +89,3 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-

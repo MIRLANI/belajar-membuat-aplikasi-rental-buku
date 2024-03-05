@@ -41,7 +41,12 @@ Route::middleware("auth")->group(function(){
     Route::controller(BookController::class)->group(function(){
         Route::get("/books", "index")->name("index.books");
         Route::get("/books-add", "add")->name("add.books");
-        Route::post("/books-add", "store")->name("save.books");
+        Route::post("/books-add", "store")->name("store.books");
+        Route::get("/books-edit/{slug}", "edit")->name("edit.books");
+        Route::get("/books-delete/{slug}", "delete")->name("delete.books");
+        Route::post("/books-edit/{slug}", "update")->name("update.books");
+        Route::get("/books-delete", "viewdelete")->name("viewdelete.books");
+        Route::get("/books-restore/{slug}", "restore")->name("restore.books");
     });
 
     Route::controller(CatagoriController::class)->group(function(){
@@ -58,6 +63,12 @@ Route::middleware("auth")->group(function(){
     Route::controller(UserController::class)->group(function(){
 
         Route::get("/users", "index")->name("index.users");
+        Route::get("/users-register", "userRegister")->name("register.users");
+        Route::get("/users-detail/{slug}", "userDetail")->name("detail.users");
+        Route::get("/users-approve/{slug}", "userUpprove")->name("upprove.users");
+        Route::get("/users-ban/{slug}", "ban")->name("ban.users");
+        Route::get("/users-ban", "viewdelete")->name("viewdelete.users");
+        Route::get("/users-restore/{slug}", "restore")->name("restore.users");
     });
 
     Route::controller(RentLogController::class)->group(function(){
@@ -67,6 +78,6 @@ Route::middleware("auth")->group(function(){
 });
 
 Route::fallback(function(){
-    return "paht not foud ";
+    return "halaman not foud ";
 });
 
