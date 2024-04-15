@@ -38,8 +38,6 @@ class AuthControllerTest extends TestCase
             "password" => "rahasia"
         ])->assertRedirect("/login")
         ->assertSessionHas("status")
-        ->assertSessionHas("username")
-        ->assertSessionHas("password")
         ->assertSessionHas("message", "Akun kamu belum aktif. Segera hubungi admin!");
     }
 

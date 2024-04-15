@@ -28,6 +28,7 @@ class UserSeeder extends Seeder
             $user->username = "arman";
             $user->password = "rahasia";
             $user->address = "sombu";
+            $user->status = "inactive";
             $user->role_id = "2";
             $user->save();
         }
